@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,10 +40,10 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.clmSite2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmLogin2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmPass2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmcomment2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmCaption = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmPass = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStripGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripShowPass = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -51,7 +52,7 @@
             this.toolStripDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripCopy = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripCopySite = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripCopyCaption = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripCopyLogin = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripCopyPass = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripCopyComment = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,6 +97,7 @@
             // 
             // добавитьToolStripMenuItem
             // 
+            this.добавитьToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("добавитьToolStripMenuItem.Image")));
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
             this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.добавитьToolStripMenuItem.Text = "Добавить";
@@ -141,10 +143,10 @@
             this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmSite2,
-            this.clmLogin2,
-            this.clmPass2,
-            this.clmcomment2});
+            this.clmCaption,
+            this.clmLogin,
+            this.clmPass,
+            this.clmComment});
             this.dataGridView2.ContextMenuStrip = this.contextMenuStripGrid;
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView2.Location = new System.Drawing.Point(0, 49);
@@ -155,25 +157,25 @@
             this.dataGridView2.Size = new System.Drawing.Size(618, 254);
             this.dataGridView2.TabIndex = 4;
             // 
-            // clmSite2
+            // clmCaption
             // 
-            this.clmSite2.HeaderText = "Site";
-            this.clmSite2.Name = "clmSite2";
+            this.clmCaption.HeaderText = "Заголовок";
+            this.clmCaption.Name = "clmCaption";
             // 
-            // clmLogin2
+            // clmLogin
             // 
-            this.clmLogin2.HeaderText = "Login";
-            this.clmLogin2.Name = "clmLogin2";
+            this.clmLogin.HeaderText = "Имя";
+            this.clmLogin.Name = "clmLogin";
             // 
-            // clmPass2
+            // clmPass
             // 
-            this.clmPass2.HeaderText = "Password";
-            this.clmPass2.Name = "clmPass2";
+            this.clmPass.HeaderText = "Пароль";
+            this.clmPass.Name = "clmPass";
             // 
-            // clmcomment2
+            // clmComment
             // 
-            this.clmcomment2.HeaderText = "Comment";
-            this.clmcomment2.Name = "clmcomment2";
+            this.clmComment.HeaderText = "Комментарий";
+            this.clmComment.Name = "clmComment";
             // 
             // contextMenuStripGrid
             // 
@@ -208,6 +210,7 @@
             // 
             // toolStripAdd
             // 
+            this.toolStripAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripAdd.Image")));
             this.toolStripAdd.Name = "toolStripAdd";
             this.toolStripAdd.Size = new System.Drawing.Size(180, 22);
             this.toolStripAdd.Text = "Добавить";
@@ -226,7 +229,7 @@
             // toolStripCopy
             // 
             this.toolStripCopy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripCopySite,
+            this.toolStripCopyCaption,
             this.toolStripCopyLogin,
             this.toolStripCopyPass,
             this.toolStripCopyComment});
@@ -234,10 +237,10 @@
             this.toolStripCopy.Size = new System.Drawing.Size(180, 22);
             this.toolStripCopy.Text = "Копировать";
             // 
-            // toolStripCopySite
+            // toolStripCopyCaption
             // 
-            this.toolStripCopySite.Name = "toolStripCopySite";
-            this.toolStripCopySite.Size = new System.Drawing.Size(67, 22);
+            this.toolStripCopyCaption.Name = "toolStripCopyCaption";
+            this.toolStripCopyCaption.Size = new System.Drawing.Size(67, 22);
             // 
             // toolStripCopyLogin
             // 
@@ -294,10 +297,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmSite2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmLogin2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmPass2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmcomment2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripGrid;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -310,10 +309,14 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripEdit;
         private System.Windows.Forms.ToolStripMenuItem toolStripAdd;
         private System.Windows.Forms.ToolStripMenuItem toolStripDelete;
-        private System.Windows.Forms.ToolStripMenuItem toolStripCopySite;
+        private System.Windows.Forms.ToolStripMenuItem toolStripCopyCaption;
         private System.Windows.Forms.ToolStripMenuItem toolStripCopyLogin;
         private System.Windows.Forms.ToolStripMenuItem toolStripCopyPass;
         private System.Windows.Forms.ToolStripMenuItem toolStripCopyComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmCaption;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmLogin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmPass;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmComment;
     }
 }
 

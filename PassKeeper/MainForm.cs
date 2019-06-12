@@ -20,7 +20,22 @@ namespace PassKeeper
         // Adding new Row
         private void AddNewRow()
         {
+            // show edit form
+            EditForm ef = new EditForm();
+            DialogResult result = ef.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                // add new row
+                int n = dataGridView2.Rows.Add();
+                // fill this row
+                dataGridView2.Rows[n].Cells[0].Value = ef.Caption;
+                dataGridView2.Rows[n].Cells[1].Value = ef.Login;
+                dataGridView2.Rows[n].Cells[2].Value = ef.Password;
+                dataGridView2.Rows[n].Cells[3].Value = ef.Comment;
 
+                // sort by 
+                dataGridView2.Sort(dataGridView2.Columns[0], ListSortDirection.Ascending);
+            }
         }
 
 
