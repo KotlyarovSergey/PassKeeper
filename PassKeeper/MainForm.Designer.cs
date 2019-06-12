@@ -1,6 +1,6 @@
 ﻿namespace PassKeeper
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -91,19 +91,20 @@
             // изменитьToolStripMenuItem
             // 
             this.изменитьToolStripMenuItem.Name = "изменитьToolStripMenuItem";
-            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.изменитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.изменитьToolStripMenuItem.Text = "Изменить";
             // 
             // добавитьToolStripMenuItem
             // 
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.добавитьToolStripMenuItem.Text = "Добавить";
+            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
             // удалитьToolStripMenuItem
             // 
             this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.удалитьToolStripMenuItem.Text = "Удалить";
             // 
             // toolStrip1
@@ -185,41 +186,42 @@
             this.toolStripSeparator2,
             this.toolStripCopy});
             this.contextMenuStripGrid.Name = "contextMenuStripGrid";
-            this.contextMenuStripGrid.Size = new System.Drawing.Size(168, 126);
+            this.contextMenuStripGrid.Size = new System.Drawing.Size(181, 148);
+            this.contextMenuStripGrid.Click += new System.EventHandler(this.contextMenuStripGrid_Click);
             // 
             // toolStripShowPass
             // 
             this.toolStripShowPass.Name = "toolStripShowPass";
-            this.toolStripShowPass.Size = new System.Drawing.Size(167, 22);
+            this.toolStripShowPass.Size = new System.Drawing.Size(180, 22);
             this.toolStripShowPass.Text = "Показать пароль";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripEdit
             // 
             this.toolStripEdit.Name = "toolStripEdit";
-            this.toolStripEdit.Size = new System.Drawing.Size(167, 22);
+            this.toolStripEdit.Size = new System.Drawing.Size(180, 22);
             this.toolStripEdit.Text = "Изменить";
             // 
             // toolStripAdd
             // 
             this.toolStripAdd.Name = "toolStripAdd";
-            this.toolStripAdd.Size = new System.Drawing.Size(167, 22);
+            this.toolStripAdd.Size = new System.Drawing.Size(180, 22);
             this.toolStripAdd.Text = "Добавить";
             // 
             // toolStripDelete
             // 
             this.toolStripDelete.Name = "toolStripDelete";
-            this.toolStripDelete.Size = new System.Drawing.Size(167, 22);
+            this.toolStripDelete.Size = new System.Drawing.Size(180, 22);
             this.toolStripDelete.Text = "Удалить";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripCopy
             // 
@@ -229,7 +231,7 @@
             this.toolStripCopyPass,
             this.toolStripCopyComment});
             this.toolStripCopy.Name = "toolStripCopy";
-            this.toolStripCopy.Size = new System.Drawing.Size(167, 22);
+            this.toolStripCopy.Size = new System.Drawing.Size(180, 22);
             this.toolStripCopy.Text = "Копировать";
             // 
             // toolStripCopySite
@@ -262,7 +264,7 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -273,7 +275,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = " ";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
