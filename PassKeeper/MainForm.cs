@@ -32,17 +32,62 @@ namespace PassKeeper
                 dataGridView2.Rows[n].Cells[1].Value = ef.Login;
                 dataGridView2.Rows[n].Cells[2].Value = ef.Password;
                 dataGridView2.Rows[n].Cells[3].Value = ef.Comment;
+                
+                // sort by 
+                dataGridView2.Sort(dataGridView2.Columns[0], ListSortDirection.Ascending);
+            }
+        }
+
+        // edit row
+        private void EditRow()
+        {
+            if (dataGridView2.CurrentRow == null)
+                return;
+
+            int n = dataGridView2.CurrentRow.Index;
+
+            // show edit form
+            EditForm ef = new EditForm((string)dataGridView2.Rows[n].Cells[0].Value,
+                (string)dataGridView2.Rows[n].Cells[1].Value,
+                (string)dataGridView2.Rows[n].Cells[2].Value,
+                (string)dataGridView2.Rows[n].Cells[3].Value);
+            DialogResult result = ef.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                // fill this row
+                dataGridView2.Rows[n].Cells[0].Value = ef.Caption;
+                dataGridView2.Rows[n].Cells[1].Value = ef.Login;
+                dataGridView2.Rows[n].Cells[2].Value = ef.Password;
+                dataGridView2.Rows[n].Cells[3].Value = ef.Comment;
 
                 // sort by 
                 dataGridView2.Sort(dataGridView2.Columns[0], ListSortDirection.Ascending);
             }
         }
 
+        // delete row
+        private void DeleteRow()
+        {
+            if (dataGridView2.CurrentRow == null)
+                return;
+
+            int n = dataGridView2.CurrentRow.Index;
+            if (n < 0)
+                return;
+
+            string txt = "Уверены, что хотите удалить \"" + dataGridView2.Rows[n].Cells[0].Value + "\"?";
+            DialogResult result = MessageBox.Show(txt,
+                                                  "Удалить запись",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Asterisk);
+            if (result == DialogResult.Yes)
+                dataGridView2.Rows.RemoveAt(n);
+        }
 
 
         private void FillToSort()
         {
-            for(int i = 0; i< dataGridView2.RowCount; i++)
+            for (int i = 0; i < dataGridView2.RowCount; i++)
             {
                 if (i % 2 == 0)
                 {
@@ -64,7 +109,7 @@ namespace PassKeeper
                     a = rnd.Next();
                     //dataGridView2.Rows[r].Cells[c].Value = a;
                     //dataGridView2.Rows[r].Cells[c].Value = a.ToString("X");
-                    dataGridView2.Rows[r].Cells[c].Value = 
+                    dataGridView2.Rows[r].Cells[c].Value =
                         a.ToString() + "=" + a.ToString("X");
                 }
             }
