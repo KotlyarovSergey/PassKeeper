@@ -8,25 +8,6 @@ namespace PassKeeper
 {
     partial class MainForm
     {
-        private void button1_Click(object sender, EventArgs e)
-        {
-            dataGridView2.Rows.Add(3);
-            FillGrid();
-            FillToSort();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //dataGridView2.Rows.Clear();
-            //dataGridView2.Rows[0].Cells[0].Value = dataGridView2.Rows.Count.ToString();
-
-
-            for (int i = 0; i < dataGridView2.RowCount; i++)
-            {
-                dataGridView2.Rows[i].Cells[1].Value = (i).ToString();
-            }
-        }
-
         private void addRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddNewRow();

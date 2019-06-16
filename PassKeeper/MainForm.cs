@@ -12,9 +12,12 @@ namespace PassKeeper
 {
     public partial class MainForm : Form
     {
+        private bool needSave;
+
         public MainForm()
         {
             InitializeComponent();
+            needSave = false;
         }
 
         // Adding new Row
@@ -32,9 +35,12 @@ namespace PassKeeper
                 dataGridView2.Rows[n].Cells[1].Value = ef.Login;
                 dataGridView2.Rows[n].Cells[2].Value = ef.Password;
                 dataGridView2.Rows[n].Cells[3].Value = ef.Comment;
-                
+
                 // sort by 
                 dataGridView2.Sort(dataGridView2.Columns[0], ListSortDirection.Ascending);
+
+                // need save
+                needSave = true;
             }
         }
 
@@ -62,6 +68,9 @@ namespace PassKeeper
 
                 // sort by 
                 dataGridView2.Sort(dataGridView2.Columns[0], ListSortDirection.Ascending);
+
+                // need save
+                needSave = true;
             }
         }
 
@@ -81,40 +90,17 @@ namespace PassKeeper
                                                   MessageBoxButtons.YesNo,
                                                   MessageBoxIcon.Asterisk);
             if (result == DialogResult.Yes)
+            {
                 dataGridView2.Rows.RemoveAt(n);
-        }
-
-
-        private void FillToSort()
-        {
-            for (int i = 0; i < dataGridView2.RowCount; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    dataGridView2.Rows[i].Cells[0].Value = (i + 1).ToString();
-                }
-                else
-                    dataGridView2.Rows[i].Cells[0].Value = (i - 1).ToString();
+                
+                // need save
+                needSave = true;
             }
         }
 
-        private void FillGrid()
-        {
-            Random rnd = new Random();
-            int a;
-            for (int r = 0; r < dataGridView2.RowCount; r++)
-            {
-                for (int c = 0; c < dataGridView2.ColumnCount; c++)
-                {
-                    a = rnd.Next();
-                    //dataGridView2.Rows[r].Cells[c].Value = a;
-                    //dataGridView2.Rows[r].Cells[c].Value = a.ToString("X");
-                    dataGridView2.Rows[r].Cells[c].Value =
-                        a.ToString() + "=" + a.ToString("X");
-                }
-            }
-        }
 
         
+
+
     }
 }

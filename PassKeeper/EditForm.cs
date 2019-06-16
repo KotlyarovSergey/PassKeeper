@@ -24,7 +24,7 @@ namespace PassKeeper
             Login = "";
             Password = "";
             Comment = "";
-            this.Text = "Добавление новой записи";
+            this.Text = "Новая запись";
         }
 
         public EditForm(string caption, string name, string pass, string comment)
