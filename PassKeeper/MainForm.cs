@@ -13,11 +13,14 @@ namespace PassKeeper
     public partial class MainForm : Form
     {
         private bool needSave;
+        private bool showAllPass;
+        private const string hidePasswordString = "**********";
 
         public MainForm()
         {
             InitializeComponent();
             needSave = false;
+            showAllPass = false;
         }
 
         // Adding new Row
@@ -33,8 +36,17 @@ namespace PassKeeper
                 // fill this row
                 dataGridView2.Rows[n].Cells[0].Value = ef.Caption;
                 dataGridView2.Rows[n].Cells[1].Value = ef.Login;
-                dataGridView2.Rows[n].Cells[2].Value = ef.Password;
+                if(showAllPass)
+                {
+                    dataGridView2.Rows[n].Cells[2].Value = ef.Password;
+                }
+                else
+                {
+                    dataGridView2.Rows[n].Cells[2].Value = hidePasswordString;
+                }
+                
                 dataGridView2.Rows[n].Cells[3].Value = ef.Comment;
+                dataGridView2.Rows[n].Cells[4].Value = ef.Password;
 
                 // sort by 
                 dataGridView2.Sort(dataGridView2.Columns[0], ListSortDirection.Ascending);
@@ -55,7 +67,7 @@ namespace PassKeeper
             // show edit form
             EditForm ef = new EditForm((string)dataGridView2.Rows[n].Cells[0].Value,
                 (string)dataGridView2.Rows[n].Cells[1].Value,
-                (string)dataGridView2.Rows[n].Cells[2].Value,
+                (string)dataGridView2.Rows[n].Cells[4].Value,
                 (string)dataGridView2.Rows[n].Cells[3].Value);
             DialogResult result = ef.ShowDialog();
             if (result == DialogResult.OK)
@@ -63,8 +75,16 @@ namespace PassKeeper
                 // fill this row
                 dataGridView2.Rows[n].Cells[0].Value = ef.Caption;
                 dataGridView2.Rows[n].Cells[1].Value = ef.Login;
-                dataGridView2.Rows[n].Cells[2].Value = ef.Password;
+                if (showAllPass)
+                {
+                    dataGridView2.Rows[n].Cells[2].Value = ef.Password;
+                }
+                else
+                {
+                    dataGridView2.Rows[n].Cells[2].Value = hidePasswordString;
+                }
                 dataGridView2.Rows[n].Cells[3].Value = ef.Comment;
+                dataGridView2.Rows[n].Cells[4].Value = ef.Password;
 
                 // sort by 
                 dataGridView2.Sort(dataGridView2.Columns[0], ListSortDirection.Ascending);
@@ -96,11 +116,9 @@ namespace PassKeeper
                 // need save
                 needSave = true;
             }
+
         }
 
-
         
-
-
     }
 }

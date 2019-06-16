@@ -48,7 +48,7 @@ namespace PassKeeper
             this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.copyStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyCaptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyLoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyPassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +63,7 @@ namespace PassKeeper
             this.clmLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmPass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmComment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hidePass = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStripGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripShowPass = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -146,20 +147,22 @@ namespace PassKeeper
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showPassToolStripMenuItem,
             this.toolStripSeparator3,
-            this.editRowToolStripMenuItem,
             this.addRowToolStripMenuItem,
+            this.editRowToolStripMenuItem,
             this.deleteRowToolStripMenuItem,
             this.toolStripSeparator4,
-            this.copyStripMenuItem});
+            this.copyToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.editToolStripMenuItem.Text = "Правка";
+            this.editToolStripMenuItem.DropDownOpening += new System.EventHandler(this.editToolStripMenuItem_DropDownOpening);
             // 
             // showPassToolStripMenuItem
             // 
             this.showPassToolStripMenuItem.Name = "showPassToolStripMenuItem";
-            this.showPassToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.showPassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showPassToolStripMenuItem.Text = "Показать пароль";
+            this.showPassToolStripMenuItem.Click += new System.EventHandler(this.showPassToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -170,7 +173,7 @@ namespace PassKeeper
             // 
             this.editRowToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editRowToolStripMenuItem.Image")));
             this.editRowToolStripMenuItem.Name = "editRowToolStripMenuItem";
-            this.editRowToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.editRowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editRowToolStripMenuItem.Text = "Изменить";
             this.editRowToolStripMenuItem.Click += new System.EventHandler(this.editRowToolStripMenuItem_Click);
             // 
@@ -195,16 +198,16 @@ namespace PassKeeper
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(164, 6);
             // 
-            // copyStripMenuItem
+            // copyToolStripMenuItem
             // 
-            this.copyStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyCaptionToolStripMenuItem,
             this.copyLoginToolStripMenuItem,
             this.copyPassToolStripMenuItem,
             this.copyCommentToolStripMenuItem});
-            this.copyStripMenuItem.Name = "copyStripMenuItem";
-            this.copyStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.copyStripMenuItem.Text = "Копировать";
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.copyToolStripMenuItem.Text = "Копировать";
             // 
             // copyCaptionToolStripMenuItem
             // 
@@ -247,12 +250,14 @@ namespace PassKeeper
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.viewToolStripMenuItem.Text = "Вид";
+            this.viewToolStripMenuItem.DropDownOpening += new System.EventHandler(this.viewToolStripMenuItem_DropDownOpening);
             // 
             // displayPassToolStripMenuItem
             // 
             this.displayPassToolStripMenuItem.Name = "displayPassToolStripMenuItem";
             this.displayPassToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.displayPassToolStripMenuItem.Text = "Отображать пароли";
+            this.displayPassToolStripMenuItem.Click += new System.EventHandler(this.displayPassToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -281,7 +286,8 @@ namespace PassKeeper
             this.clmCaption,
             this.clmLogin,
             this.clmPass,
-            this.clmComment});
+            this.clmComment,
+            this.hidePass});
             this.dataGridView2.ContextMenuStrip = this.contextMenuStripGrid;
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(0, 49);
@@ -312,36 +318,44 @@ namespace PassKeeper
             this.clmComment.HeaderText = "Комментарий";
             this.clmComment.Name = "clmComment";
             // 
+            // hidePass
+            // 
+            this.hidePass.HeaderText = "Hide Pass";
+            this.hidePass.Name = "hidePass";
+            this.hidePass.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.hidePass.Visible = false;
+            // 
             // contextMenuStripGrid
             // 
             this.contextMenuStripGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripShowPass,
             this.toolStripSeparator1,
-            this.toolStripEdit,
             this.toolStripAdd,
+            this.toolStripEdit,
             this.toolStripDelete,
             this.toolStripSeparator2,
             this.toolStripCopy});
             this.contextMenuStripGrid.Name = "contextMenuStripGrid";
             this.contextMenuStripGrid.Size = new System.Drawing.Size(168, 126);
+            this.contextMenuStripGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripGrid_Opening);
             // 
             // toolStripShowPass
             // 
             this.toolStripShowPass.Name = "toolStripShowPass";
-            this.toolStripShowPass.Size = new System.Drawing.Size(167, 22);
+            this.toolStripShowPass.Size = new System.Drawing.Size(180, 22);
             this.toolStripShowPass.Text = "Показать пароль";
             this.toolStripShowPass.Click += new System.EventHandler(this.toolStripShowPass_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripEdit
             // 
             this.toolStripEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripEdit.Image")));
             this.toolStripEdit.Name = "toolStripEdit";
-            this.toolStripEdit.Size = new System.Drawing.Size(167, 22);
+            this.toolStripEdit.Size = new System.Drawing.Size(180, 22);
             this.toolStripEdit.Text = "Изменить";
             this.toolStripEdit.Click += new System.EventHandler(this.toolStripEdit_Click);
             // 
@@ -349,7 +363,7 @@ namespace PassKeeper
             // 
             this.toolStripAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripAdd.Image")));
             this.toolStripAdd.Name = "toolStripAdd";
-            this.toolStripAdd.Size = new System.Drawing.Size(167, 22);
+            this.toolStripAdd.Size = new System.Drawing.Size(180, 22);
             this.toolStripAdd.Text = "Добавить";
             this.toolStripAdd.Click += new System.EventHandler(this.toolStripAdd_Click);
             // 
@@ -357,14 +371,14 @@ namespace PassKeeper
             // 
             this.toolStripDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDelete.Image")));
             this.toolStripDelete.Name = "toolStripDelete";
-            this.toolStripDelete.Size = new System.Drawing.Size(167, 22);
+            this.toolStripDelete.Size = new System.Drawing.Size(180, 22);
             this.toolStripDelete.Text = "Удалить";
             this.toolStripDelete.Click += new System.EventHandler(this.toolStripDelete_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(164, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // toolStripCopy
             // 
@@ -374,7 +388,7 @@ namespace PassKeeper
             this.toolStripCopyPass,
             this.toolStripCopyComment});
             this.toolStripCopy.Name = "toolStripCopy";
-            this.toolStripCopy.Size = new System.Drawing.Size(167, 22);
+            this.toolStripCopy.Size = new System.Drawing.Size(180, 22);
             this.toolStripCopy.Text = "Копировать";
             // 
             // toolStripCopyCaption
@@ -440,14 +454,10 @@ namespace PassKeeper
         private System.Windows.Forms.ToolStripMenuItem toolStripCopyLogin;
         private System.Windows.Forms.ToolStripMenuItem toolStripCopyPass;
         private System.Windows.Forms.ToolStripMenuItem toolStripCopyComment;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmCaption;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmLogin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmPass;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmComment;
         private System.Windows.Forms.ToolStripMenuItem showPassToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem copyStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyCaptionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyLoginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyPassToolStripMenuItem;
@@ -462,6 +472,11 @@ namespace PassKeeper
         private System.Windows.Forms.ToolStripMenuItem saveAsoolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmCaption;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmLogin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmPass;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmComment;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hidePass;
     }
 }
 
