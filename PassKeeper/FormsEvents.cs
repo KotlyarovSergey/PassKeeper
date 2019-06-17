@@ -141,6 +141,31 @@ namespace PassKeeper
             }
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            // if run with file, necessary decrypt him with users key
+            string[] comandArgs = System.Environment.GetCommandLineArgs();
+            
+            if (comandArgs.Length > 1)
+            {
+                // verify that this our file
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+                InputForm inputForm = new InputForm();
+                DialogResult dr = inputForm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    string key = inputForm.key;
+                    //MessageBox.Show(key);
+                }
+                else
+                {
+                    // don't open file
+                }
+                //MessageBox.Show(string.Join("\r\n",comandArgs));
+            }
+        }
     }
 }
