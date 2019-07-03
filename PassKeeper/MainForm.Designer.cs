@@ -32,13 +32,13 @@ namespace PassKeeper
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +58,7 @@ namespace PassKeeper
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.displayPassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridMain = new System.Windows.Forms.DataGridView();
             this.clmCaption = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmLogin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmPass = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,7 +77,7 @@ namespace PassKeeper
             this.toolStripCopyPass = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripCopyComment = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMain)).BeginInit();
             this.contextMenuStripGrid.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,7 +100,7 @@ namespace PassKeeper
             this.newFileToolStripMenuItem,
             this.openFileToolStripMenuItem,
             this.saveFileToolStripMenuItem,
-            this.saveAsoolStripMenuItem,
+            this.saveAsToolStripMenuItem,
             this.toolStripSeparator5,
             this.выходToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -110,36 +110,39 @@ namespace PassKeeper
             // newFileToolStripMenuItem
             // 
             this.newFileToolStripMenuItem.Name = "newFileToolStripMenuItem";
-            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newFileToolStripMenuItem.Text = "Новый";
             // 
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openFileToolStripMenuItem.Text = "Открыть";
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
             // 
             // saveFileToolStripMenuItem
             // 
             this.saveFileToolStripMenuItem.Name = "saveFileToolStripMenuItem";
-            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.saveFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveFileToolStripMenuItem.Text = "Сохранить";
+            this.saveFileToolStripMenuItem.Click += new System.EventHandler(this.saveFileToolStripMenuItem_Click);
             // 
-            // saveAsoolStripMenuItem
+            // saveAsToolStripMenuItem
             // 
-            this.saveAsoolStripMenuItem.Name = "saveAsoolStripMenuItem";
-            this.saveAsoolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.saveAsoolStripMenuItem.Text = "Сохранить как...";
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Text = "Сохранить как...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(159, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             // 
             // editToolStripMenuItem
@@ -160,20 +163,20 @@ namespace PassKeeper
             // showPassToolStripMenuItem
             // 
             this.showPassToolStripMenuItem.Name = "showPassToolStripMenuItem";
-            this.showPassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showPassToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.showPassToolStripMenuItem.Text = "Показать пароль";
             this.showPassToolStripMenuItem.Click += new System.EventHandler(this.showPassToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(164, 6);
             // 
             // addRowToolStripMenuItem
             // 
             this.addRowToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addRowToolStripMenuItem.Image")));
             this.addRowToolStripMenuItem.Name = "addRowToolStripMenuItem";
-            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.addRowToolStripMenuItem.Text = "Добавить";
             this.addRowToolStripMenuItem.Click += new System.EventHandler(this.addRowToolStripMenuItem_Click);
             // 
@@ -181,7 +184,7 @@ namespace PassKeeper
             // 
             this.editRowToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editRowToolStripMenuItem.Image")));
             this.editRowToolStripMenuItem.Name = "editRowToolStripMenuItem";
-            this.editRowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editRowToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.editRowToolStripMenuItem.Text = "Изменить";
             this.editRowToolStripMenuItem.Click += new System.EventHandler(this.editRowToolStripMenuItem_Click);
             // 
@@ -189,14 +192,14 @@ namespace PassKeeper
             // 
             this.deleteRowToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteRowToolStripMenuItem.Image")));
             this.deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
-            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.deleteRowToolStripMenuItem.Text = "Удалить";
             this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(164, 6);
             // 
             // copyToolStripMenuItem
             // 
@@ -206,7 +209,7 @@ namespace PassKeeper
             this.copyPassToolStripMenuItem,
             this.copyCommentToolStripMenuItem});
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.copyToolStripMenuItem.Text = "Копировать";
             // 
             // copyCaptionToolStripMenuItem
@@ -242,6 +245,7 @@ namespace PassKeeper
             this.changeCodeToolStripMenuItem.Name = "changeCodeToolStripMenuItem";
             this.changeCodeToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.changeCodeToolStripMenuItem.Text = "Сменить пароль";
+            this.changeCodeToolStripMenuItem.Click += new System.EventHandler(this.changeCodeToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -267,36 +271,36 @@ namespace PassKeeper
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // dataGridView2
+            // dataGridMain
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridMain.AllowUserToAddRows = false;
+            this.dataGridMain.AllowUserToResizeRows = false;
+            this.dataGridMain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridMain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmCaption,
             this.clmLogin,
             this.clmPass,
             this.clmComment,
             this.hidePass});
-            this.dataGridView2.ContextMenuStrip = this.contextMenuStripGrid;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 49);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(618, 304);
-            this.dataGridView2.TabIndex = 4;
+            this.dataGridMain.ContextMenuStrip = this.contextMenuStripGrid;
+            this.dataGridMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridMain.Location = new System.Drawing.Point(0, 49);
+            this.dataGridMain.MultiSelect = false;
+            this.dataGridMain.Name = "dataGridMain";
+            this.dataGridMain.RowHeadersVisible = false;
+            this.dataGridMain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridMain.Size = new System.Drawing.Size(618, 304);
+            this.dataGridMain.TabIndex = 4;
             // 
             // clmCaption
             // 
@@ -416,7 +420,7 @@ namespace PassKeeper
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 353);
-            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.dataGridMain);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -425,7 +429,7 @@ namespace PassKeeper
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMain)).EndInit();
             this.contextMenuStripGrid.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -439,7 +443,7 @@ namespace PassKeeper
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridMain;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripGrid;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -470,7 +474,7 @@ namespace PassKeeper
         private System.Windows.Forms.ToolStripMenuItem newFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsoolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmCaption;

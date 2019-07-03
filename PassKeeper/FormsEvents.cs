@@ -13,8 +13,8 @@ namespace PassKeeper
     {
         private void contextMenuStripGrid_Opening(object sender, CancelEventArgs e)
         {
-            if (showAllPass || dataGridView2.CurrentRow == null ||
-                dataGridView2.CurrentRow.Cells[2].Value == dataGridView2.CurrentRow.Cells[4].Value)
+            if (showAllPass || dataGridMain.CurrentRow == null ||
+                dataGridMain.CurrentRow.Cells[2].Value == dataGridMain.CurrentRow.Cells[4].Value)
             {
                 toolStripShowPass.Enabled = false;
             }
@@ -23,7 +23,7 @@ namespace PassKeeper
                 toolStripShowPass.Enabled = true;
             }
 
-            if (dataGridView2.CurrentRow == null)
+            if (dataGridMain.CurrentRow == null)
             {
                 toolStripEdit.Enabled = false;
                 toolStripDelete.Enabled = false;
@@ -55,15 +55,15 @@ namespace PassKeeper
 
         private void showPassToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridView2.CurrentRow.Cells[2].Value =
-                        dataGridView2.CurrentRow.Cells[4].Value;
+            dataGridMain.CurrentRow.Cells[2].Value =
+                        dataGridMain.CurrentRow.Cells[4].Value;
         }
 
 
         private void toolStripShowPass_Click(object sender, EventArgs e)
         {
-            dataGridView2.CurrentRow.Cells[2].Value =
-                        dataGridView2.CurrentRow.Cells[4].Value;
+            dataGridMain.CurrentRow.Cells[2].Value =
+                        dataGridMain.CurrentRow.Cells[4].Value;
         }
 
         private void toolStripEdit_Click(object sender, EventArgs e)
@@ -83,8 +83,8 @@ namespace PassKeeper
 
         private void editToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            if (showAllPass || dataGridView2.CurrentRow == null ||
-                dataGridView2.CurrentRow.Cells[2].Value == dataGridView2.CurrentRow.Cells[4].Value)
+            if (showAllPass || dataGridMain.CurrentRow == null ||
+                dataGridMain.CurrentRow.Cells[2].Value == dataGridMain.CurrentRow.Cells[4].Value)
             {
                 showPassToolStripMenuItem.Enabled = false;
             }
@@ -93,7 +93,7 @@ namespace PassKeeper
                 showPassToolStripMenuItem.Enabled = true;
             }
 
-            if (dataGridView2.CurrentRow == null)
+            if (dataGridMain.CurrentRow == null)
             {
                 editRowToolStripMenuItem.Enabled = false;
                 deleteRowToolStripMenuItem.Enabled = false;
@@ -126,17 +126,17 @@ namespace PassKeeper
 
             if (showAllPass)
             {
-                for (int i = 0; i < dataGridView2.RowCount; i++)
+                for (int i = 0; i < dataGridMain.RowCount; i++)
                 {
-                    dataGridView2.Rows[i].Cells[2].Value =
-                        dataGridView2.Rows[i].Cells[4].Value;
+                    dataGridMain.Rows[i].Cells[2].Value =
+                        dataGridMain.Rows[i].Cells[4].Value;
                 }
             }
             else
             {
-                for (int i = 0; i < dataGridView2.RowCount; i++)
+                for (int i = 0; i < dataGridMain.RowCount; i++)
                 {
-                    dataGridView2.Rows[i].Cells[2].Value = hidePasswordString;
+                    dataGridMain.Rows[i].Cells[2].Value = HIDEPASSWORDSTRING;
                 }
             }
         }
@@ -145,27 +145,114 @@ namespace PassKeeper
         {
             // if run with file, necessary decrypt him with users key
             string[] comandArgs = System.Environment.GetCommandLineArgs();
-            
+            //MessageBox.Show(string.Join("\r\n", comandArgs));
+
             if (comandArgs.Length > 1)
             {
                 // verify that this our file
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                openedFile = comandArgs[1];
+                OpenFile();
 
-                InputForm inputForm = new InputForm();
-                DialogResult dr = inputForm.ShowDialog();
-                if (dr == DialogResult.OK)
-                {
-                    string key = inputForm.key;
-                    //MessageBox.Show(key);
-                }
-                else
-                {
-                    // don't open file
-                }
+                
                 //MessageBox.Show(string.Join("\r\n",comandArgs));
             }
         }
+
+        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (needSave)
+            {
+                DialogResult dialog = MessageBox.Show("Файл \"" + shortFileName +"\" не сохранен. Сохранить?", "Сохранить", MessageBoxButtons.YesNoCancel);
+                if(dialog == DialogResult.Yes)      // Save
+                {
+                    // if is new file
+                    if (openedFile == string.Empty)
+                    {
+                        // needed SaveAs..
+                        saveAsToolStripMenuItem_Click(sender, e);
+                    }
+                    else
+                    {
+                        SaveFile();
+                    }
+                }
+                else if(dialog == DialogResult.No)  // Not save
+                {
+
+                }
+                else    // Cancel
+                {
+                    return;
+                }
+            }
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = FILEEXTENTION + " files (*." + FILEEXTENTION + ")|*." + FILEEXTENTION + "|All files (*.*)|*.*";
+            DialogResult dialogResult = openFileDialog.ShowDialog();
+            if(dialogResult == DialogResult.OK)
+            {
+                dataGridMain.Rows.Clear();
+                openedFile = openFileDialog.FileName;
+                shortFileName = System.IO.Path.GetFileNameWithoutExtension(openedFile);
+                OpenFile();
+            }
+        }
+
+        private void saveFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(openedFile != string.Empty)
+            {
+                // does it exist Path
+                string dir = System.IO.Path.GetDirectoryName(openedFile);
+                if (System.IO.Directory.Exists(dir))
+                {
+                    // create/overwite file
+                    SaveFile();
+                }
+                else
+                {
+                    MessageBox.Show("Путь: \"" + dir + "\" не найден!");
+                }
+            }
+            else
+            {
+                // needed SaveAs..
+                saveAsToolStripMenuItem_Click(sender, e);
+            }
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = FILEEXTENTION;
+            saveFileDialog.Filter = FILEEXTENTION + " files (*." + FILEEXTENTION + ")|*." + FILEEXTENTION + "|All files (*.*)|*.*";
+            saveFileDialog.SupportMultiDottedExtensions = false;
+            DialogResult result = saveFileDialog.ShowDialog();
+            {
+                if (result == DialogResult.OK)
+                {
+                    openedFile = saveFileDialog.FileName;
+                    SaveFile();
+                }
+            }
+        }
+
+        private void changeCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InputForm inputForm = new InputForm();
+            DialogResult dr = inputForm.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                encriptionKey = inputForm.key;
+                needSave = true;
+            }
+            else
+            {
+                encriptionKey = string.Empty;
+            }
+        }
+
+        
     }
 }

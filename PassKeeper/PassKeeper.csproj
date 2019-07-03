@@ -51,6 +51,7 @@
     <Compile Include="EditForm.Designer.cs">
       <DependentUpon>EditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Encription.cs" />
     <Compile Include="FormsEvents.cs">
       <SubType>Form</SubType>
     </Compile>

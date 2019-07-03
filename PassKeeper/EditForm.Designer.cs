@@ -54,6 +54,7 @@
             // 
             this.textBoxCaption.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxCaption.Location = new System.Drawing.Point(12, 38);
+            this.textBoxCaption.MaxLength = 127;
             this.textBoxCaption.Name = "textBoxCaption";
             this.textBoxCaption.Size = new System.Drawing.Size(272, 26);
             this.textBoxCaption.TabIndex = 1;
@@ -62,6 +63,7 @@
             // 
             this.textBoxLogin.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxLogin.Location = new System.Drawing.Point(12, 109);
+            this.textBoxLogin.MaxLength = 127;
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(272, 26);
             this.textBoxLogin.TabIndex = 3;
@@ -80,6 +82,7 @@
             // 
             this.textBoxComment.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxComment.Location = new System.Drawing.Point(12, 246);
+            this.textBoxComment.MaxLength = 127;
             this.textBoxComment.Name = "textBoxComment";
             this.textBoxComment.Size = new System.Drawing.Size(272, 26);
             this.textBoxComment.TabIndex = 7;
@@ -98,6 +101,7 @@
             // 
             this.textBoxPass.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxPass.Location = new System.Drawing.Point(12, 175);
+            this.textBoxPass.MaxLength = 127;
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.Size = new System.Drawing.Size(272, 26);
             this.textBoxPass.TabIndex = 5;
