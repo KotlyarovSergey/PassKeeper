@@ -155,7 +155,7 @@ namespace PassKeeper
                     //MessageBox.Show(key);
                     ReadPskFile();
 
-                    DecriptFile();
+                    //DecriptFile();
 
                     this.Text = shortFileName;
                 }
@@ -175,7 +175,6 @@ namespace PassKeeper
 
         private void SaveFile()
         {
-
             WritePskFile();
         }
 
@@ -326,31 +325,33 @@ namespace PassKeeper
         private void WritePskFile()
         {
             byte[] table = TableToArray();
+
+            // ========
+            // ENCRIPT
+            // ========
+            Encription encription = new Encription();
+            table = encription.Encript(table);
+
             try
             {
                 FileStream stream = File.Create(openedFile);
                 stream.Write(table, 0, table.Length);
                 stream.Close();
+                needSave = false;
             }
             catch
             {
                 MessageBox.Show("Не удалось записать файл!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //MessageBox.Show("Save file: \"" + openedFile + "\"");
         }
 
         private void ReadPskFile()
         {
-
             byte[] buffer = new byte[1];
             try
             {
-                //FileInfo fi = new FileInfo(openedFile);
-                //buffer = new byte[fi.Length];
-                //MessageBox.Show("buffer length: " + buffer.Length);
                 FileStream stream = File.Open(openedFile,FileMode.Open);
                 buffer = new byte[stream.Length];
-                MessageBox.Show("buffer length: " + buffer.Length);
                 stream.Read(buffer, 0, buffer.Length);
                 stream.Close();
 
@@ -360,7 +361,15 @@ namespace PassKeeper
                 MessageBox.Show("Не удалось прочитать файл!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            // ==============
+            // DECRIPT buffer
+            // ==============
+            Encription encription = new Encription();
+            buffer = encription.Decript(buffer);
+
             TableFromArray(buffer);
         }
+
+        
     }
 }

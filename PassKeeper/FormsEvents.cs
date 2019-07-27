@@ -158,6 +158,37 @@ namespace PassKeeper
             }
         }
 
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (needSave)
+            {
+                DialogResult dialog = MessageBox.Show("Файл \"" + shortFileName + "\" не сохранен. Сохранить?", "Сохранить", MessageBoxButtons.YesNoCancel);
+                if (dialog == DialogResult.Yes)      // Save
+                {
+                    // if is new file
+                    if (openedFile == string.Empty)
+                    {
+                        // needed SaveAs..
+                        saveAsToolStripMenuItem_Click(sender, new EventArgs());
+                    }
+                    else
+                    {
+                        SaveFile();
+                    }
+                }
+                else if (dialog == DialogResult.No)  // Not save
+                {
+
+                }
+                else    // Cancel
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (needSave)
