@@ -1,6 +1,6 @@
 ﻿namespace PassKeeper
 {
-    partial class InputForm
+    partial class KeyInputForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,9 +32,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblLang = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblCapsLock = new System.Windows.Forms.Label();
+            this.lblLang = new System.Windows.Forms.Label();
             this.btnON = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -83,18 +83,6 @@
             this.panel1.Size = new System.Drawing.Size(125, 36);
             this.panel1.TabIndex = 3;
             // 
-            // lblLang
-            // 
-            this.lblLang.AutoSize = true;
-            this.lblLang.BackColor = System.Drawing.Color.Blue;
-            this.lblLang.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblLang.ForeColor = System.Drawing.Color.White;
-            this.lblLang.Location = new System.Drawing.Point(3, 3);
-            this.lblLang.Name = "lblLang";
-            this.lblLang.Size = new System.Drawing.Size(36, 24);
-            this.lblLang.TabIndex = 0;
-            this.lblLang.Text = "RU";
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -115,6 +103,18 @@
             this.lblCapsLock.Text = "CapsLock";
             this.lblCapsLock.Visible = false;
             // 
+            // lblLang
+            // 
+            this.lblLang.AutoSize = true;
+            this.lblLang.BackColor = System.Drawing.Color.Blue;
+            this.lblLang.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblLang.ForeColor = System.Drawing.Color.White;
+            this.lblLang.Location = new System.Drawing.Point(3, 3);
+            this.lblLang.Name = "lblLang";
+            this.lblLang.Size = new System.Drawing.Size(36, 24);
+            this.lblLang.TabIndex = 0;
+            this.lblLang.Text = "RU";
+            // 
             // btnON
             // 
             this.btnON.Font = new System.Drawing.Font("Lucida Sans", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -127,7 +127,7 @@
             this.btnON.Click += new System.EventHandler(this.btnON_Click);
             this.btnON.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnON_KeyDown);
             // 
-            // InputForm
+            // KeyInputForm
             // 
             this.AcceptButton = this.btnON;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -140,7 +140,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "InputForm";
+            this.Name = "KeyInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Password Keeper";
             this.Load += new System.EventHandler(this.InputForm_Load);

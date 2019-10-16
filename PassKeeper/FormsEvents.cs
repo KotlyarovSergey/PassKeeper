@@ -160,7 +160,7 @@ namespace PassKeeper
 
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        {    
             if (needSave)
             {
                 DialogResult dialog = MessageBox.Show("Файл \"" + shortFileName + "\" не сохранен. Сохранить?", "Сохранить", MessageBoxButtons.YesNoCancel);
@@ -188,6 +188,44 @@ namespace PassKeeper
             }
         }
 
+        private void newFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // need Save?
+            if(needSave)
+            {
+                DialogResult dialog = MessageBox.Show("Файл \"" + shortFileName + "\" не сохранен. Сохранить?", "Сохранить", MessageBoxButtons.YesNoCancel);
+                if (dialog == DialogResult.Yes)      // Save
+                {
+                    // if is new file
+                    if (openedFile == string.Empty)
+                    {
+                        // needed SaveAs..
+                        saveAsToolStripMenuItem_Click(sender, e);
+                    }
+                    else
+                    {
+                        SaveFile();
+                    }
+                }
+                else if (dialog == DialogResult.No)  // Not save
+                {
+
+                }
+                else    // Cancel
+                {
+                    return;
+                }
+            }
+
+            // create new file
+            needSave = false;
+            dataGridMain.Rows.Clear();
+            openedFile = string.Empty;
+            shortFileName = string.Empty;
+            encriptionKey = string.Empty;
+            this.Text = string.Empty;
+
+        }
 
         private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -264,14 +302,23 @@ namespace PassKeeper
                 if (result == DialogResult.OK)
                 {
                     openedFile = saveFileDialog.FileName;
+                    shortFileName = System.IO.Path.GetFileNameWithoutExtension(openedFile);
                     SaveFile();
+
                 }
             }
         }
 
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
         private void changeCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InputForm inputForm = new InputForm();
+            KeyInputForm inputForm = new KeyInputForm();
             DialogResult dr = inputForm.ShowDialog();
             if (dr == DialogResult.OK)
             {

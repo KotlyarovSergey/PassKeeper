@@ -33,6 +33,8 @@ namespace PassKeeper
 
         private const string HIDEPASSWORDSTRING = "**********";
         private const string FILEEXTENTION = "paskk";
+        private const int MAXROWSCOUNT = 1000;
+        private const string DEMOCAPTION = " - DEMO!!!";
 
         public MainForm()
         {
@@ -42,11 +44,20 @@ namespace PassKeeper
             openedFile = string.Empty;
             shortFileName = string.Empty;
             encriptionKey = string.Empty;
+            this.Text = "Password Keeper" + DEMOCAPTION;
         }
 
         // Adding new Row
         private void AddNewRow()
         {
+            if (dataGridMain.Rows.Count == MAXROWSCOUNT)
+            {
+                MessageBox.Show("You have reached the maximum number of rows",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                return;
+            }
             // show edit form
             EditForm ef = new EditForm();
             DialogResult result = ef.ShowDialog();
@@ -145,11 +156,11 @@ namespace PassKeeper
             // if file exist
             if (System.IO.File.Exists(openedFile))
             {
-                InputForm inputForm = new InputForm();
-                DialogResult dr = inputForm.ShowDialog();
+                KeyInputForm keyInputForm = new KeyInputForm();
+                DialogResult dr = keyInputForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    encriptionKey = inputForm.key;
+                    encriptionKey = keyInputForm.key;
                     // decript file with key
 
                     //MessageBox.Show(key);
@@ -157,11 +168,13 @@ namespace PassKeeper
 
                     //DecriptFile();
 
-                    this.Text = shortFileName;
+                    this.Text = shortFileName + DEMOCAPTION;
                 }
                 else
                 {
                     encriptionKey = string.Empty;
+                    openedFile = string.Empty;
+                    shortFileName = string.Empty;
                 }
             }
             else
@@ -253,12 +266,21 @@ namespace PassKeeper
         }
 
 
-        private void TableFromArray(byte[] array)
+        private bool TableFromArray(byte[] array)
         {
             MemoryStream memoryStream = new MemoryStream(array);
             byte[] buffer = new byte[4];
             memoryStream.Read(buffer, 0, 4);
+
+            // get rows number
             int row = BitConverter.ToInt32(buffer, 0);
+            if (row <= 0 || row >= MAXROWSCOUNT)
+            {
+                showError();
+                return false;
+            }
+
+
             int rowIndex;
             RowOfTable rowOfTable = new RowOfTable();
             for (int i = 0; i < row; i++)
@@ -319,6 +341,16 @@ namespace PassKeeper
                 dataGridMain.Rows[rowIndex].Cells[3].Value = rowOfTable.Comment;
             }
 
+
+            void showError()
+            {
+                MessageBox.Show("Invalid key or file is corrupted.",
+                                "Decryption error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
+
+            return true;
         }
 
 
@@ -329,7 +361,7 @@ namespace PassKeeper
             // ========
             // ENCRIPT
             // ========
-            Encription encription = new Encription();
+            Encription encription = new Encription(encriptionKey);
             table = encription.Encript(table);
 
             try
@@ -338,10 +370,12 @@ namespace PassKeeper
                 stream.Write(table, 0, table.Length);
                 stream.Close();
                 needSave = false;
+                this.Text = shortFileName + DEMOCAPTION;
             }
             catch
             {
                 MessageBox.Show("Не удалось записать файл!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Text = "Password Keeper" + DEMOCAPTION;
             }
         }
 
@@ -350,7 +384,7 @@ namespace PassKeeper
             byte[] buffer = new byte[1];
             try
             {
-                FileStream stream = File.Open(openedFile,FileMode.Open);
+                FileStream stream = File.Open(openedFile, FileMode.Open);
                 buffer = new byte[stream.Length];
                 stream.Read(buffer, 0, buffer.Length);
                 stream.Close();
@@ -358,16 +392,43 @@ namespace PassKeeper
             }
             catch
             {
+                openedFile = string.Empty;
+                shortFileName = string.Empty;
                 MessageBox.Show("Не удалось прочитать файл!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             // ==============
             // DECRIPT buffer
             // ==============
-            Encription encription = new Encription();
+            Encription encription = new Encription(encriptionKey);
             buffer = encription.Decript(buffer);
 
-            TableFromArray(buffer);
+            bool transferIsOk = TableFromArray(buffer);
+            if(transferIsOk)
+            {
+                // hide/show passwords
+                if (showAllPass)
+                {
+                    for (int i = 0; i < dataGridMain.RowCount; i++)
+                    {
+                        dataGridMain.Rows[i].Cells[2].Value =
+                            dataGridMain.Rows[i].Cells[4].Value;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < dataGridMain.RowCount; i++)
+                    {
+                        dataGridMain.Rows[i].Cells[2].Value = HIDEPASSWORDSTRING;
+                    }
+                }
+            }
+            else
+            {
+                openedFile = string.Empty;
+                shortFileName = string.Empty;
+            }
         }
 
         

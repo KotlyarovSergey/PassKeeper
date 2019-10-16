@@ -9,7 +9,7 @@ using System.IO;
 
 namespace PassKeeper
 {
-    
+
     class Encription
     {
         //private class RowOfTable
@@ -23,20 +23,43 @@ namespace PassKeeper
         //    public string Pass;
         //    public string Comment;
         //}
-
-        public Encription()
+        private string _key;
+        public Encription(string key)
         {
-
+            _key = key;
         }
 
         public byte[] Encript(byte[] input)
         {
-            return input;
+            byte[] buffer = new byte[input.Length];
+            byte shift = ShiftCalc();
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                buffer[i] = (byte)(input[i] + shift);
+            }
+            return buffer;
         }
 
         public byte[] Decript(byte[] input)
         {
-            return input;
+            byte[] buffer = new byte[input.Length];
+            byte shift = ShiftCalc();
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                buffer[i] = (byte)(input[i] - shift);
+            }
+            return buffer;
+        }
+
+        private byte ShiftCalc()
+        {
+            byte shift = 0;
+            for (int i = 0; i < _key.Length; i++)
+            {
+                shift += (byte)_key[i];
+            }
+
+            return shift;
         }
     }
 }

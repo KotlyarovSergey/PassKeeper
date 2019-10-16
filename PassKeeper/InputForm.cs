@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace PassKeeper
 {
-    public partial class InputForm : Form
+    public partial class KeyInputForm : Form
     {
         public string key = string.Empty;
-        public InputForm()
+        public KeyInputForm()
         {
             InitializeComponent();
         }
