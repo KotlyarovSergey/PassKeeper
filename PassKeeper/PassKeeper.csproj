@@ -55,11 +55,11 @@
     <Compile Include="FormsEvents.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InputForm.cs">
+    <Compile Include="KeyInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InputForm.Designer.cs">
-      <DependentUpon>InputForm.cs</DependentUpon>
+    <Compile Include="KeyInputForm.Designer.cs">
+      <DependentUpon>KeyInputForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -72,8 +72,8 @@
     <EmbeddedResource Include="EditForm.resx">
       <DependentUpon>EditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InputForm.resx">
-      <DependentUpon>InputForm.cs</DependentUpon>
+    <EmbeddedResource Include="KeyInputForm.resx">
+      <DependentUpon>KeyInputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

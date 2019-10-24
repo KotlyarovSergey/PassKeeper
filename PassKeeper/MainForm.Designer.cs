@@ -214,26 +214,31 @@ namespace PassKeeper
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.copyToolStripMenuItem.Text = "Копировать";
+            this.copyToolStripMenuItem.DropDownOpening += new System.EventHandler(this.copyToolStripMenuItem_DropDownOpening);
             // 
             // copyCaptionToolStripMenuItem
             // 
             this.copyCaptionToolStripMenuItem.Name = "copyCaptionToolStripMenuItem";
             this.copyCaptionToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.copyCaptionToolStripMenuItem.Click += new System.EventHandler(copyToolStripMenuItem_Click);
             // 
             // copyLoginToolStripMenuItem
             // 
             this.copyLoginToolStripMenuItem.Name = "copyLoginToolStripMenuItem";
             this.copyLoginToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.copyLoginToolStripMenuItem.Click += new System.EventHandler(copyToolStripMenuItem_Click);
             // 
             // copyPassToolStripMenuItem
             // 
             this.copyPassToolStripMenuItem.Name = "copyPassToolStripMenuItem";
             this.copyPassToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.copyPassToolStripMenuItem.Click += new System.EventHandler(copyToolStripMenuItem_Click);
             // 
             // copyCommentToolStripMenuItem
             // 
             this.copyCommentToolStripMenuItem.Name = "copyCommentToolStripMenuItem";
             this.copyCommentToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.copyCommentToolStripMenuItem.Click += new System.EventHandler(copyToolStripMenuItem_Click);
             // 
             // settingToolStripMenuItem
             // 
@@ -406,26 +411,31 @@ namespace PassKeeper
             this.toolStripCopy.Name = "toolStripCopy";
             this.toolStripCopy.Size = new System.Drawing.Size(167, 22);
             this.toolStripCopy.Text = "Копировать";
+            this.toolStripCopy.DropDownOpening += new System.EventHandler(this.toolStripCopy_DropDownOpening);
             // 
             // toolStripCopyCaption
             // 
             this.toolStripCopyCaption.Name = "toolStripCopyCaption";
-            this.toolStripCopyCaption.Size = new System.Drawing.Size(67, 22);
+            this.toolStripCopyCaption.Size = new System.Drawing.Size(180, 22);
+            this.toolStripCopyCaption.Click += new System.EventHandler(this.toolStripCopy_Click);
             // 
             // toolStripCopyLogin
             // 
             this.toolStripCopyLogin.Name = "toolStripCopyLogin";
-            this.toolStripCopyLogin.Size = new System.Drawing.Size(67, 22);
+            this.toolStripCopyLogin.Size = new System.Drawing.Size(180, 22);
+            this.toolStripCopyLogin.Click += new System.EventHandler(this.toolStripCopy_Click);
             // 
             // toolStripCopyPass
             // 
             this.toolStripCopyPass.Name = "toolStripCopyPass";
-            this.toolStripCopyPass.Size = new System.Drawing.Size(67, 22);
+            this.toolStripCopyPass.Size = new System.Drawing.Size(180, 22);
+            this.toolStripCopyPass.Click += new System.EventHandler(this.toolStripCopy_Click);
             // 
             // toolStripCopyComment
             // 
             this.toolStripCopyComment.Name = "toolStripCopyComment";
-            this.toolStripCopyComment.Size = new System.Drawing.Size(67, 22);
+            this.toolStripCopyComment.Size = new System.Drawing.Size(180, 22);
+            this.toolStripCopyComment.Click += new System.EventHandler(this.toolStripCopy_Click);
             // 
             // MainForm
             // 
@@ -449,7 +459,7 @@ namespace PassKeeper
 
         }
 
-        
+
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;

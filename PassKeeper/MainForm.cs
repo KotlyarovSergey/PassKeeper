@@ -156,11 +156,11 @@ namespace PassKeeper
             // if file exist
             if (System.IO.File.Exists(openedFile))
             {
-                KeyInputForm keyInputForm = new KeyInputForm();
-                DialogResult dr = keyInputForm.ShowDialog();
+                KeyInputForm inputForm = new KeyInputForm();
+                DialogResult dr = inputForm.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
-                    encriptionKey = keyInputForm.key;
+                    encriptionKey = inputForm.key;
                     // decript file with key
 
                     //MessageBox.Show(key);
@@ -191,13 +191,13 @@ namespace PassKeeper
             WritePskFile();
         }
 
-
+        /*
         // decript file
         private void DecriptFile()
         {
             MessageBox.Show("открываем " + openedFile + " и дешифруем с помощью " + encriptionKey);
         }
-
+        */
 
         private byte[] TableToArray()
         {
@@ -430,6 +430,8 @@ namespace PassKeeper
                 shortFileName = string.Empty;
             }
         }
+
+      
 
         
     }

@@ -13,14 +13,22 @@ namespace PassKeeper
     {
         private void contextMenuStripGrid_Opening(object sender, CancelEventArgs e)
         {
-            if (showAllPass || dataGridMain.CurrentRow == null ||
-                dataGridMain.CurrentRow.Cells[2].Value == dataGridMain.CurrentRow.Cells[4].Value)
+            if (showAllPass || dataGridMain.CurrentRow == null )
             {
                 toolStripShowPass.Enabled = false;
             }
             else
             {
                 toolStripShowPass.Enabled = true;
+                if (dataGridMain.CurrentRow.Cells[2].Value == dataGridMain.CurrentRow.Cells[4].Value)
+                {
+                    toolStripShowPass.Text = "Скрыть пароль";
+                }
+                else
+                {
+                    toolStripShowPass.Text = "Показать пароль";
+                }
+                
             }
 
             if (dataGridMain.CurrentRow == null)
@@ -34,6 +42,24 @@ namespace PassKeeper
                 toolStripEdit.Enabled = true;
                 toolStripDelete.Enabled = true;
                 toolStripCopy.Enabled = true;
+            }
+        }
+
+        private void toolStripCopy_DropDownOpening(object sender, EventArgs e)
+        {
+            if (dataGridMain.CurrentRow != null)
+            {
+                toolStripCopyCaption.Text = dataGridMain.CurrentRow.Cells[0].Value.ToString();
+                toolStripCopyLogin.Text = dataGridMain.CurrentRow.Cells[1].Value.ToString();
+                toolStripCopyPass.Text = dataGridMain.CurrentRow.Cells[4].Value.ToString();
+                toolStripCopyComment.Text = dataGridMain.CurrentRow.Cells[3].Value.ToString();
+            }
+            else
+            {
+                toolStripCopyCaption.Text = "";
+                toolStripCopyLogin.Text = "";
+                toolStripCopyPass.Text = "";
+                toolStripCopyComment.Text = "";
             }
         }
 
@@ -53,17 +79,45 @@ namespace PassKeeper
             DeleteRow();
         }
 
+        private void toolStripCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(sender.ToString());
+            this.Text = sender.ToString();
+        }
+
         private void showPassToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridMain.CurrentRow.Cells[2].Value =
+            if (showPassToolStripMenuItem.Text == "Показать пароль")
+            {
+                // need show password
+                dataGridMain.CurrentRow.Cells[2].Value =
                         dataGridMain.CurrentRow.Cells[4].Value;
+                //toolStripShowPass.Text = "Скрыть пароль";
+            }
+            else
+            {
+                // need hide
+                dataGridMain.CurrentRow.Cells[2].Value = HIDEPASSWORDSTRING;
+                //toolStripShowPass.Text = "Показать пароль";
+            }
         }
 
 
         private void toolStripShowPass_Click(object sender, EventArgs e)
         {
-            dataGridMain.CurrentRow.Cells[2].Value =
+            if (toolStripShowPass.Text == "Показать пароль")
+            {
+                // need show password
+                dataGridMain.CurrentRow.Cells[2].Value =
                         dataGridMain.CurrentRow.Cells[4].Value;
+                //toolStripShowPass.Text = "Скрыть пароль";
+            }
+            else
+            {
+                // need hide
+                dataGridMain.CurrentRow.Cells[2].Value = HIDEPASSWORDSTRING;
+                //toolStripShowPass.Text = "Показать пароль";
+            }
         }
 
         private void toolStripEdit_Click(object sender, EventArgs e)
@@ -83,16 +137,28 @@ namespace PassKeeper
 
         private void editToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            if (showAllPass || dataGridMain.CurrentRow == null ||
-                dataGridMain.CurrentRow.Cells[2].Value == dataGridMain.CurrentRow.Cells[4].Value)
+            if (showAllPass || dataGridMain.CurrentRow == null)
             {
+                //toolStripShowPass.Enabled = false;
                 showPassToolStripMenuItem.Enabled = false;
             }
             else
             {
+                //toolStripShowPass.Enabled = true;
                 showPassToolStripMenuItem.Enabled = true;
-            }
+                if (dataGridMain.CurrentRow.Cells[2].Value == dataGridMain.CurrentRow.Cells[4].Value)
+                {
+                    //toolStripShowPass.Text = "Скрыть пароль";
+                    showPassToolStripMenuItem.Text = "Скрыть пароль";
+                }
+                else
+                {
+                    //toolStripShowPass.Text = "Показать пароль";
+                    showPassToolStripMenuItem.Text = "Показать пароль";
+                }
 
+            }
+            
             if (dataGridMain.CurrentRow == null)
             {
                 editRowToolStripMenuItem.Enabled = false;
@@ -105,6 +171,30 @@ namespace PassKeeper
                 deleteRowToolStripMenuItem.Enabled = true;
                 copyToolStripMenuItem.Enabled = true;
             }
+        }
+
+        private void copyToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            if (dataGridMain.CurrentRow != null)
+            {
+                copyCaptionToolStripMenuItem.Text = dataGridMain.CurrentRow.Cells[0].Value.ToString();
+                copyLoginToolStripMenuItem.Text = dataGridMain.CurrentRow.Cells[1].Value.ToString();
+                copyPassToolStripMenuItem.Text = dataGridMain.CurrentRow.Cells[4].Value.ToString();
+                copyCommentToolStripMenuItem.Text = dataGridMain.CurrentRow.Cells[3].Value.ToString();
+            }
+            else
+            {
+                copyCaptionToolStripMenuItem.Text = "";
+                copyLoginToolStripMenuItem.Text = "";
+                copyPassToolStripMenuItem.Text = "";
+                copyCommentToolStripMenuItem.Text = "";
+            }
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(sender.ToString());
+            //this.Text = sender.ToString();
         }
 
         private void viewToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
@@ -131,6 +221,8 @@ namespace PassKeeper
                     dataGridMain.Rows[i].Cells[2].Value =
                         dataGridMain.Rows[i].Cells[4].Value;
                 }
+                toolStripShowPass.Text = "Скрыть пароль";
+                showPassToolStripMenuItem.Text = "Скрыть пароль";
             }
             else
             {
@@ -138,6 +230,8 @@ namespace PassKeeper
                 {
                     dataGridMain.Rows[i].Cells[2].Value = HIDEPASSWORDSTRING;
                 }
+                //toolStripShowPass.Text = "Показать пароль";
+                //showPassToolStripMenuItem.Text = "Показать пароль";
             }
         }
 
@@ -153,14 +247,14 @@ namespace PassKeeper
                 openedFile = comandArgs[1];
                 OpenFile();
 
-                
+
                 //MessageBox.Show(string.Join("\r\n",comandArgs));
             }
         }
 
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {    
+        {
             if (needSave)
             {
                 DialogResult dialog = MessageBox.Show("Файл \"" + shortFileName + "\" не сохранен. Сохранить?", "Сохранить", MessageBoxButtons.YesNoCancel);
@@ -191,7 +285,7 @@ namespace PassKeeper
         private void newFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // need Save?
-            if(needSave)
+            if (needSave)
             {
                 DialogResult dialog = MessageBox.Show("Файл \"" + shortFileName + "\" не сохранен. Сохранить?", "Сохранить", MessageBoxButtons.YesNoCancel);
                 if (dialog == DialogResult.Yes)      // Save
@@ -231,8 +325,8 @@ namespace PassKeeper
         {
             if (needSave)
             {
-                DialogResult dialog = MessageBox.Show("Файл \"" + shortFileName +"\" не сохранен. Сохранить?", "Сохранить", MessageBoxButtons.YesNoCancel);
-                if(dialog == DialogResult.Yes)      // Save
+                DialogResult dialog = MessageBox.Show("Файл \"" + shortFileName + "\" не сохранен. Сохранить?", "Сохранить", MessageBoxButtons.YesNoCancel);
+                if (dialog == DialogResult.Yes)      // Save
                 {
                     // if is new file
                     if (openedFile == string.Empty)
@@ -245,7 +339,7 @@ namespace PassKeeper
                         SaveFile();
                     }
                 }
-                else if(dialog == DialogResult.No)  // Not save
+                else if (dialog == DialogResult.No)  // Not save
                 {
 
                 }
@@ -259,7 +353,7 @@ namespace PassKeeper
             openFileDialog.Multiselect = false;
             openFileDialog.Filter = FILEEXTENTION + " files (*." + FILEEXTENTION + ")|*." + FILEEXTENTION + "|All files (*.*)|*.*";
             DialogResult dialogResult = openFileDialog.ShowDialog();
-            if(dialogResult == DialogResult.OK)
+            if (dialogResult == DialogResult.OK)
             {
                 dataGridMain.Rows.Clear();
                 openedFile = openFileDialog.FileName;
@@ -270,7 +364,7 @@ namespace PassKeeper
 
         private void saveFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(openedFile != string.Empty)
+            if (openedFile != string.Empty)
             {
                 // does it exist Path
                 string dir = System.IO.Path.GetDirectoryName(openedFile);
@@ -327,10 +421,10 @@ namespace PassKeeper
             }
             else
             {
-                encriptionKey = string.Empty;
+                //encriptionKey = string.Empty;
             }
         }
 
-        
+
     }
 }
